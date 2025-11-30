@@ -24,7 +24,7 @@ This directory contains environment-specific configuration for the **development
 ## Configuration Notes
 
 - **Cost Optimization**: Dev uses Fargate Spot, shorter log retention, minimal replicas
-- **Networking**: Uses public subnets with auto-assign public IP (no NAT Gateway)
+- **Network**: Uses public subnets with auto-assign public IP (no NAT Gateway)
 - **Secrets**: Store in SSM Parameter Store, reference in task definitions
 
 ## Important

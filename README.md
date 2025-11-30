@@ -20,7 +20,7 @@ Internet → Route53 → ALB (HTTPS) → ECS Fargate → ECR
 ├── versions.tf             # Provider versions
 ├── backend.tf              # S3 backend config
 ├── modules/
-│   └── networking/         # VPC, subnets, security groups
+│   └── network/         # VPC, subnets, security groups
 │       ├── main.tf
 │       ├── variables.tf
 │       ├── outputs.tf
@@ -69,7 +69,7 @@ Internet → Route53 → ALB (HTTPS) → ECS Fargate → ECR
 
 ## Module Dependencies
 
-1. `networking` - VPC, subnets, security groups (created first)
+1. `network` - VPC, subnets, security groups (created first)
 2. `iam` - Task execution and task roles (TODO)
 3. `ecr` - Container registry (TODO)
 4. `ecs` - Fargate cluster and service (TODO)
