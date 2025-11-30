@@ -46,7 +46,7 @@ Internet → Route53 → ALB (HTTPS) → ECS Fargate → ECR
 2. **Initialize Terraform**:
    ```bash
    cd ../..
-   terraform init
+   terraform init -backend-config=environments/dev/backend.hcl
    ```
 
 3. **Validate configuration**:
