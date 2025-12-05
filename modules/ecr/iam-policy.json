@@ -2,7 +2,7 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "ECRManagement",
+      "Sid": "ECRRepositoryManagement",
       "Effect": "Allow",
       "Action": [
         "ecr:CreateRepository",
@@ -12,8 +12,7 @@
         "ecr:TagResource",
         "ecr:UntagResource",
         "ecr:PutImageTagMutability",
-        "ecr:PutImageScanningConfiguration",
-        "ecr:PutEncryptionConfiguration"
+        "ecr:PutImageScanningConfiguration"
       ],
       "Resource": "arn:aws:ecr:*:*:repository/*"
     },
@@ -26,14 +25,6 @@
         "ecr:DeleteLifecyclePolicy"
       ],
       "Resource": "arn:aws:ecr:*:*:repository/*"
-    },
-    {
-      "Sid": "ECRList",
-      "Effect": "Allow",
-      "Action": [
-        "ecr:DescribeRegistry"
-      ],
-      "Resource": "*"
     }
   ]
 }
