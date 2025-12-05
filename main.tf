@@ -6,7 +6,6 @@ module "network" {
 
   project_name       = var.project_name
   environment        = var.environment
-
   vpc_cidr           = var.vpc_cidr
   availability_zones = var.availability_zones
 }
@@ -16,7 +15,6 @@ module "ecr" {
 
   project_name         = var.project_name
   environment          = var.environment
-
   image_tag_mutability = var.ecr_image_tag_mutability
   scan_on_push         = var.ecr_scan_on_push
   encryption_type      = var.ecr_encryption_type
