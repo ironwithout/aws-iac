@@ -56,6 +56,7 @@ Tasks run in awsvpc network mode with:
 | `desired_count` | Desired task count | `number` |
 | `launch_type` | FARGATE or FARGATE_SPOT | `string` |
 | `log_retention_days` | CloudWatch log retention days | `number` |
+| `aws_region` | AWS region for CloudWatch logs | `string` |
 
 ## Module Outputs
 
@@ -91,6 +92,8 @@ module "ecs" {
   task_memory              = "512"
   desired_count            = 1
   launch_type              = "FARGATE"
+  
+  aws_region               = data.aws_region.current.name
 }
 ```
 

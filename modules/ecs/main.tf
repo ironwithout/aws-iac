@@ -64,7 +64,7 @@ resource "aws_ecs_task_definition" "app" {
         logDriver = "awslogs"
         options = {
           "awslogs-group"         = aws_cloudwatch_log_group.ecs.name
-          "awslogs-region"        = data.aws_region.current.name
+          "awslogs-region"        = var.aws_region
           "awslogs-stream-prefix" = "ecs"
         }
       }
@@ -125,6 +125,3 @@ resource "aws_ecs_service" "app" {
     Name = "${var.project_name}-${var.environment}-service"
   }
 }
-
-# Data source for current AWS region
-data "aws_region" "current" {}

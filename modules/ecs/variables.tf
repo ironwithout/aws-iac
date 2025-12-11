@@ -180,3 +180,9 @@ variable "enable_container_insights" {
   type        = bool
   default     = false
 }
+
+# AWS Region
+variable "aws_region" {
+  description = "AWS region for CloudWatch logs configuration"
+  type        = string
+}

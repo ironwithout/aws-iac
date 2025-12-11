@@ -3,6 +3,9 @@
 # Get current AWS account information
 data "aws_caller_identity" "current" {}
 
+# Get current AWS region
+data "aws_region" "current" {}
+
 # Validate we're using the correct AWS account
 resource "terraform_data" "account_validation" {
   lifecycle {
