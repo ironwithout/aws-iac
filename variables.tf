@@ -24,12 +24,12 @@ variable "project_name" {
 }
 
 variable "environment" {
-  description = "Environment name (dev, prod, staging)"
+  description = "Environment name (dev, prod)"
   type        = string
 
   validation {
-    condition     = contains(["dev", "prod", "staging"], var.environment)
-    error_message = "Environment must be one of: dev, prod, staging."
+    condition     = contains(["dev", "prod"], var.environment)
+    error_message = "Environment must be one of: dev, or prod."
   }
 }
 
@@ -44,33 +44,64 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-# ECR
-variable "ecr_image_tag_mutability" {
-  description = "ECR image tag mutability (MUTABLE or IMMUTABLE)"
+# Services Configuration (includes ECR and ECS settings per service)
+# ECS configuration
+variable "enable_container_insights" {
+  description = "Enable container insights"
   type        = string
+
+  validation {
+    condition     = contains(["enabled", "disabled"], var.enable_container_insights)
+    error_message = "Container insights must be enabled or disabled."
+  }
 }
 
-variable "ecr_scan_on_push" {
-  description = "Enable ECR image scanning on push"
-  type        = bool
-}
+variable "ecs_services" {
+  description = "Map of service configurations including ECR and ECS settings"
+  type = map(object({
+    # ECR Configuration
+    ecr_image_tag_mutability = string
+    ecr_scan_on_push         = bool
+    ecr_encryption_type      = string
+    ecr_kms_key_arn          = string
+    ecr_max_image_count      = number
+    ecr_untagged_image_days  = number
 
-variable "ecr_encryption_type" {
-  description = "ECR encryption type (AES256 or KMS)"
-  type        = string
-}
+    # ECS Configuration
+    container_name      = string
+    container_port      = number
+    container_image_tag = string
+    container_environment_variables = list(object({
+      name  = string
+      value = string
+    }))
 
-variable "ecr_kms_key_arn" {
-  description = "KMS key ARN for encryption (required if encryption_type is KMS)"
-  type        = string
-}
+    # Task Configuration
+    task_cpu    = string
+    task_memory = string
 
-variable "ecr_max_image_count" {
-  description = "Maximum number of tagged ECR images to retain"
-  type        = number
-}
+    # Service Configuration
+    desired_count       = number
+    launch_type         = string
+    assign_public_ip    = bool
+    use_private_subnets = bool
 
-variable "ecr_untagged_image_days" {
-  description = "Days to retain untagged ECR images before expiration"
-  type        = number
+    # Logging
+    log_retention_days = number
+
+    # Health Check
+    health_check_command      = list(string)
+    health_check_interval     = number
+    health_check_timeout      = number
+    health_check_retries      = number
+    health_check_start_period = number
+
+    # Deployment
+    deployment_maximum_percent         = number
+    deployment_minimum_healthy_percent = number
+    enable_deployment_circuit_breaker  = bool
+    enable_deployment_rollback         = bool
+  }))
+
+  default = {}
 }

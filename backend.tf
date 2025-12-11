@@ -1,9 +1,7 @@
 terraform {
   backend "s3" {
-    bucket       = "terraform-state-123456789012-us-east-1"
-    region       = "us-east-1"
+    # bucket, region, and key are provided via -backend-config flag during init
+    # See environments/{env}/backend.hcl for environment-specific configuration
     use_lockfile = true
-    # key is provided via -backend-config flag during init
-    # See environments/{env}/backend.hcl for environment-specific keys
   }
 }

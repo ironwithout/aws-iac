@@ -13,6 +13,9 @@ crash.*.log
 environments/**/terraform.tfvars
 *.tfvars
 
+# Backend configuration (contains account-specific data)
+environments/**/backend.hcl
+
 # Exclude override files
 override.tf
 override.tf.json

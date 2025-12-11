@@ -32,16 +32,18 @@ See `modules/network/main.tf` resource `aws_security_group_rule.alb_to_ecs`.
 ## Environment Workflow
 
 ### State Isolation
-Common backend config in `backend.tf`, environment-specific keys in `environments/{env}/backend.hcl`:
+Backend configuration is in `backend.tf`, environment-specific settings in `environments/{env}/backend.hcl`:
 ```hcl
 # backend.tf
 backend "s3" {
-  bucket = "terraform-state-123456789012-us-east-1"
-  # key from backend.hcl
+  # bucket, region, and key from backend.hcl
+  use_lockfile = true
 }
 
 # environments/dev/backend.hcl
-key = "aws-iac/ecs-webapp/dev/terraform.tfstate"
+bucket = "terraform-state-<ACCOUNT_ID>-<REGION>"
+region = "us-east-1"
+key    = "aws-iac/ecs-webapp/dev/terraform.tfstate"
 ```
 
 ### Commands
