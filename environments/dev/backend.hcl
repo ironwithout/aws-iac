@@ -1,3 +1,0 @@
-bucket = "terraform-state-436204347828-us-east-1"
-region = "us-east-1"
-key    = "aws-iac/ecs-webapp/dev/terraform.tfstate"
